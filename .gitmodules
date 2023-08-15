@@ -1,3 +1,4 @@
 [submodule "third_party/refl-cpp"]
 	path = third_party/refl-cpp
 	url = https://github.com/veselink1/refl-cpp.git
+    branch = master
