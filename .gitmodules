@@ -1,4 +1,3 @@
 [submodule "refl-cpp"]
-    path = third_praty/refl-cpp
-    url = https://github.com/veselink1/refl-cpp.git
-    branch = master
+	path = refl-cpp
+	url = https://github.com/veselink1/refl-cpp.git
