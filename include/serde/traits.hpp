@@ -5,7 +5,10 @@
 #include <iostream>
 #include <sstream>
 
+#include <refl.hpp>
+
 #include "macros.hpp"
+
 
 namespace binary_storage::serde {
 
@@ -20,8 +23,13 @@ static auto constexpr isNumeric = [] () constexpr -> bool {
 }();
 
 template<class T>
+static auto constexpr isString = [] () constexpr -> bool {
+    return std::is_same_v<T, std::string>;
+}();
+
+template<class T>
 static auto constexpr isVector = [] () constexpr -> bool {
-    return hasContainerTraits<T> and std::is_same_v<std::vector<T::value_type>, T>;
+    return hasContainerTraits<T> and not isString<T>;
 }();
 
 template<class T>
@@ -37,6 +45,16 @@ static auto constexpr isInStream = [] () constexpr -> bool {
 template<class T>
 static auto constexpr isStream = [] () constexpr -> bool {
     return isInStream<T> || isOutStream<T>;
+}();
+
+template<class T>
+static auto constexpr isReflectable = [] () constexpr -> bool {
+    return not isNumeric<T> and not isVector<T> and not isString<T> and refl::is_reflectable<T>();
+}();
+
+template<class T>
+static auto constexpr isSerializeble = [] () constexpr -> bool {
+    return isNumeric<T> or isVector<T> or isReflectable<T> or isString<T>;
 }();
 
 } // namespace binary_storage::serde::traits

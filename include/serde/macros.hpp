@@ -4,6 +4,8 @@
 #include <tuple>
 #include <vector>
 
+#include <refl.hpp>
+
 namespace binary_storage::serde {
                                         
 #define CREATE_HAS_TRAIT(trait)                                                                                 \
@@ -38,25 +40,7 @@ namespace binary_storage::serde {
     static auto constexpr has_##symbol##_v = details::has_##symbol<T>::value
 
 
-#define CREATE_TYPE_FIELD(type, field)                                 \
-    CREATE_HAS_SYMBOL(field);                                          \
-    struct type##Fields {                                              \  
-        static_assert(has_##field##_v<type>, "Field not found");       \
-        using type##_##field = decltype(std::declval<type>().field);   \
-        using type##_##field##_ptr = type##_##field*;                  \
-        using type##_##field##_const_ptr = type##_##field##_ptr const; \
-    }
 
-struct Test {
-    int a;
-    double b;
-    std::vector<int> c;
-};
-
-template<class T, class... Args>
-std::tuple<Args...> to_tuple(T const& obj) {
-
-}
 
 CREATE_HAS_TRAIT(value_type);
 CREATE_HAS_TRAIT(size_type);
