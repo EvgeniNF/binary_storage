@@ -2,7 +2,6 @@
 #include <refl.hpp>
 
 #include <sstream>
-#include <serde/for_each_macros.hpp>
 
 #include <serde/serde.hpp>
 
@@ -151,4 +150,3 @@ TEST(Serialize, stringTypeSize) {
         ASSERT_EQ(stream.str().size(), size);
     }
 }
-

@@ -17,8 +17,7 @@ set(HEADERS
     
     ${INCLUDE_DIR}/serde/traits.hpp
     ${INCLUDE_DIR}/serde/macros.hpp
-    ${INCLUDE_DIR}/serde/serde.hpp
-    ${INCLUDE_DIR}/serde/for_each_macros.hpp)
+    ${INCLUDE_DIR}/serde/serde.hpp)
 
 set(SOURCES
     src/binary_storage.cpp)
