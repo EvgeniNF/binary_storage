@@ -37,5 +37,6 @@ target_link_libraries(${PROJECT_NAME}
 target_compile_features(${PROJECT_NAME} PUBLIC cxx_std_17)
 
 if (TRUE) 
+    message("-- Build tests for binary storage")
     add_subdirectory(test)
 endif()
