@@ -57,5 +57,13 @@ static auto constexpr isSerializeble = [] () constexpr -> bool {
     return isNumeric<T> or isVector<T> or isReflectable<T> or isString<T>;
 }();
 
+template<class F, class... Args>
+struct ReturnType {
+    using t = decltype(std::declval<F>()(std::declval<Args>()...));
+};
+
+template<class F, class... Args>
+using ReturnType_t = typename ReturnType<F, Args...>::t;
+
 } // namespace binary_storage::serde::traits
 

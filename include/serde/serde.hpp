@@ -21,7 +21,7 @@ std::enable_if_t<isNumeric<T>, void> serializeImpl(S& stream, T const& value) no
     auto data = reinterpret_cast<typename S::char_type const* const>(&value);
 
     for (uint16_t i = 0; i < size; ++i) {
-        stream << data[i];
+        stream.put(data[i]);
     }
 }
 
@@ -52,7 +52,6 @@ std::enable_if_t<isReflectable<T>, void> serializeImpl(S& stream, T const& value
 template<class S, class T>
 static inline void assertTypes() noexcept {
     static_assert(isStream<S>, "S parameter must be a stream");
-    static_assert(isOutStream<S>, "S parameter must be a output stream");
     static_assert(isSerializeble<T>, "T parameter must be a serializeble");
 }
 

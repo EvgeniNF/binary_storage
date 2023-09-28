@@ -10,7 +10,8 @@ set(HEADERS
 set(SOURCES
     Test.main.cpp
     Test.serializeTypeSizes.cpp
-    Test.deserialize.cpp)
+    Test.deserialize.cpp
+    Test.Value.cpp)
 
 add_executable(${PROJECT_NAME} ${SOURCES} ${HEADERS})
 
