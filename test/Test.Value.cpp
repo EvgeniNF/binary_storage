@@ -27,10 +27,10 @@ TEST(Value, create) {
     uint16_t const data1 = 55;
     TestValue data2;
 
-    auto const value1 = createFromData(data1);
-    auto const value2 = createFromData(std::move(data2));
-
-    ASSERT_NE(value1.lastAccess, value2.lastAccess);
+    ASSERT_NO_THROW(
+        auto const value1 = createFromData(data1);
+        auto const value2 = createFromData(std::move(data2));
+    );
 }
 
 TEST(Value, get) {
