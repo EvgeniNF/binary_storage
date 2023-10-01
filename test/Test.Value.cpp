@@ -90,28 +90,3 @@ TEST(Value, store) {
     ASSERT_EQ(getData(value).b, data.b);
     ASSERT_DOUBLE_EQ(getData(value).c, data.c);
 }
-
-TEST(Value, atomic) {
-    std::atomic_bool isBusy {false};
-
-    auto const func = [&] () -> void {
-        bool expected = false;
-        bool const value = true;
-
-        if (not isBusy.compare_exchange_strong(expected, value)) {
-            throw std::runtime_error("Work unit is busy");
-        }
-
-        std::this_thread::sleep_for(std::chrono::seconds(1));
-
-        isBusy.store(false);
-    };
-
-    std::cout << "Hello" << std::endl;
-    func();
-    ASSERT_EQ(false, isBusy.load());
-    
-    std::cout << "Hello" << std::endl;
-    func();
-    ASSERT_EQ(false, isBusy.load());
-}
